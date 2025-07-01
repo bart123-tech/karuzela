@@ -1,6 +1,6 @@
 const CACHE_NAME = 'karuzela-cache-v1';
 const urlsToCache = [
-  'karuzela.html',
+  'index.html',
   'manifest.json',
   'icon-192.png',
   'icon-512.png'
