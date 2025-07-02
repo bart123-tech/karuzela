@@ -58,377 +58,343 @@
       z-index: 10;
     }
 
-    /* Specjalne ustawienia dla telefonu */
-    @media (max-width: 768px) {
-      body {
-        overflow-x: hidden;
-      }
+    /* ===== NOWE STYLE DLA MOBILE ===== */
+    /* Nawigacja zakładek dla mobile */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
 
-      .content-wrapper {
-        justify-content: flex-start;
-        padding: 20px 15px 80px 15px;
-        min-height: 100vh;
-      }
-      
+    .mobile-nav-tabs {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+    }
+
+    .mobile-nav-tab {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      background: none;
+      border: none;
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .mobile-nav-tab.active {
+      color: #667eea;
+      font-weight: 600;
+    }
+
+    .mobile-nav-tab.active::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20%;
+      right: 20%;
+      height: 3px;
+      background: #667eea;
+      border-radius: 0 0 3px 3px;
+    }
+
+    .mobile-nav-tab .icon {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Styl dla przycisku historii podczas przeciągania */
+    .mobile-nav-tab.drag-over {
+      background: rgba(102, 126, 234, 0.2);
+      transform: scale(1.05);
+    }
+
+    /* Data i czas dla mobile */
+    .mobile-datetime {
+      display: none;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 12px;
+      border-radius: 15px;
+      margin: 10px 0 15px 10px;
+      align-self: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .mobile-datetime #mobile-date {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 2px;
+	  font-weight: bold;
+    }
+
+    .mobile-datetime #mobile-time {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    /* Przyciski akcji dla mobile */
+    .mobile-action-buttons {
+      display: flex;
+      gap: 5px;
+    }
+
+    .mobile-action-btn {
+      padding: 8px 12px;
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 11px;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .mobile-action-btn:active {
+      background: rgba(0,0,0,0.05);
+      transform: scale(0.95);
+    }
+
+    .mobile-action-btn.save {
+      background: #667eea;
+      color: white;
+      border-color: #667eea;
+      font-weight: 600;
+    }
+
+    /* Widok mobilny - lista kół */
+    .mobile-circles-view {
+      display: none;
+      width: 100%;
+      padding-bottom: 80px; /* Miejsce na nawigację */
+    }
+
+    .mobile-circle-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      margin: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .mobile-circle-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .mobile-circle-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .mobile-add-task-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-add-task-btn:active {
+      transform: scale(0.95);
+    }
+
+    .mobile-task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mobile-task-item {
+      display: flex;
+      align-items: flex-start;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .mobile-task-item:active {
+      background: rgba(255, 255, 255, 0.95);
+      transform: scale(0.98);
+    }
+
+    .mobile-task-checkbox {
+      width: 22px;
+      height: 22px;
+      margin-right: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      user-select: none;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.8);
+      border: 2px solid #333;
+      color: #333;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .mobile-task-text {
+      flex-grow: 1;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #2c3e50;
+      padding: 2px 8px;
+      border-radius: 6px;
+      outline: none;
+      transition: background 0.2s ease;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .mobile-task-text:focus {
+      background: rgba(255,255,255,0.6);
+    }
+
+    /* Mobile history view */
+    .mobile-history-view {
+      display: none;
+      width: 100%;
+      padding: 20px;
+      padding-bottom: 80px;
+    }
+
+    .mobile-history-container {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Ukryj desktop elementy na mobile */
+    @media (max-width: 768px) {
       h1 {
         font-size: 24px;
-        margin-bottom: 20px;
-        margin-top: 10px;
+        margin-bottom: 5px;
         text-align: center;
       }
 
-      /* Mobilny kontener na koła - układ pionowy */
-      .mobile-circles-container {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-        padding-bottom: 20px;
-      }
-
-      /* Ukrycie karuzeli na mobile */
       .carousel {
         display: none !important;
       }
 
-      /* Mobilna wersja kół */
-      .mobile-circle {
-        width: 100%;
-        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        display: flex;
-        flex-direction: column;
-        min-height: 150px;
-        max-height: 300px;
-        position: relative;
-        transition: transform 0.2s ease;
+      .history-section {
+        display: none !important;
       }
 
-      .mobile-circle:nth-child(2) {
-        background: linear-gradient(135deg, #ffd93d 0%, #f9ca24 100%);
+      .content-wrapper {
+        padding: 20px 0;
+        justify-content: flex-start;
+        min-height: 100vh;
       }
 
-      .mobile-circle:nth-child(3) {
-        background: linear-gradient(135deg, #6bcf7f 0%, #4cd137 100%);
+      .mobile-nav {
+        display: block;
       }
 
-      .mobile-circle:active {
-        transform: scale(0.98);
+      .mobile-circles-view {
+        display: block;
       }
 
-      /* Tytuł mobilnego koła */
-      .mobile-circle .circle-title {
-        font-size: 18px;
-        font-weight: 700;
-        margin-bottom: 15px;
-        text-align: center;
-        color: #2c3e50;
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        font-style: normal;
+      .mobile-datetime {
+        display: block;
       }
 
-      /* Kontener zadań w mobilnym kole */
-      .mobile-circle .task-list-container {
-        flex-grow: 1;
-        overflow-y: auto;
-        max-height: 200px;
-        padding-right: 5px;
-      }
-
-      /* Zadania w mobilnej wersji */
-      .mobile-circle .task-line {
-        width: 100%;
-        max-width: 100%;
-        padding: 10px 12px;
-        margin-bottom: 10px;
-        font-size: 14px;
-        background: rgba(255,255,255,0.4);
-        border-radius: 12px;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-      }
-
-      .mobile-circle .task-line:active {
-        transform: scale(0.98);
-        background: rgba(255,255,255,0.5);
-      }
-
-      .mobile-circle .task-text {
-        font-size: 14px;
-        line-height: 1.5;
-        min-width: 0;
-        width: 100%;
-      }
-
-      .mobile-circle .checkbox {
-        width: 24px;
-        height: 24px;
-        margin-right: 12px;
-        font-size: 20px;
-      }
-
-      .mobile-circle .checkbox[data-status="2"],
-      .mobile-circle .checkbox[data-status="3"] {
-        font-size: 24px;
-      }
-
-      /* Przycisk dodawania zadania */
-      .add-task-btn {
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        background: white;
-        color: #667eea;
-        border: none;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        font-size: 28px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 1000;
-        transition: transform 0.2s ease;
-      }
-
-      .add-task-btn:active {
-        transform: scale(0.9);
-      }
-
-      /* Modal wyboru koła */
-      .circle-selector-modal {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: white;
-        border-radius: 20px 20px 0 0;
-        padding: 20px;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        z-index: 1001;
-      }
-
-      .circle-selector-modal.active {
-        transform: translateY(0);
-      }
-
-      .circle-selector-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 15px;
-        text-align: center;
-        color: #2c3e50;
-      }
-
-      .circle-selector-options {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .circle-selector-option {
-        padding: 15px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 500;
-        text-align: center;
-        cursor: pointer;
-        transition: transform 0.2s ease;
-        color: #2c3e50;
-      }
-
-      .circle-selector-option:nth-child(1) {
-        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-      }
-
-      .circle-selector-option:nth-child(2) {
-        background: linear-gradient(135deg, #ffd93d 0%, #f9ca24 100%);
-      }
-
-      .circle-selector-option:nth-child(3) {
-        background: linear-gradient(135deg, #6bcf7f 0%, #4cd137 100%);
-      }
-
-      .circle-selector-option:active {
-        transform: scale(0.95);
-      }
-
-      /* Nakładka na modal */
-      .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease;
-        z-index: 1000;
-      }
-
-      .modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      /* Dolny pasek nawigacyjny */
-      .mobile-bottom-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-        background: rgba(255,255,255,0.95);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 -2px 20px rgba(0,0,0,0.1);
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 0 20px;
-        z-index: 999;
-      }
-
-      .mobile-bottom-bar button {
-        background: none;
-        border: none;
-        padding: 8px 16px;
-        font-size: 12px;
-        color: #667eea;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        cursor: pointer;
-      }
-
-      .mobile-bottom-bar button .icon {
-        font-size: 24px;
-      }
-
-      /* Ukrycie przycisków desktopowych */
       .buttons-container {
         display: none !important;
       }
 
-      /* Data i czas na mobile */
       .datetime-container {
-        position: static;
-        margin-bottom: 20px;
-        background: rgba(255,255,255,0.2);
-        backdrop-filter: blur(5px);
-        padding: 10px 20px;
-        border-radius: 15px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
-
-      #current-date {
-        font-size: 12px;
-        color: white;
-      }
-
-      #current-time {
-        font-size: 20px;
-        color: white;
-      }
-
-      /* Historia na mobile */
-      .history-section {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 70vh;
-        background: white;
-        border-radius: 20px 20px 0 0;
-        padding: 20px;
-        margin: 0;
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        z-index: 998;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-      }
-
-      .history-section.active {
-        transform: translateY(0);
-      }
-
-      .history-title {
-        font-size: 20px;
-        color: #2c3e50;
-        text-shadow: none;
-        position: relative;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #eee;
-      }
-
-      .history-close-btn {
-        position: absolute;
-        right: 0;
-        top: -5px;
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: #999;
-        cursor: pointer;
-        padding: 5px;
-      }
-
-      .history-content {
-        max-height: calc(70vh - 100px);
-        overflow-y: auto;
-        margin-top: 15px;
-      }
-
-      .history-task {
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
-        margin-bottom: 10px;
-        padding: 12px;
-        width: 100%;
-      }
-
-      .history-task .checkbox {
-        width: 24px;
-        height: 24px;
-      }
-
-      .history-task .task-text {
-        font-size: 14px;
-        color: #495057;
-      }
-
-      .history-task .timestamp {
-        font-size: 12px;
-        display: block;
-        margin-left: 36px;
-        margin-top: 5px;
-      }
-
-      /* Wskazówka mobilna */
-      .hint {
         display: none;
       }
 
-      /* Scrollbar dla mobile */
-      .task-list-container::-webkit-scrollbar,
-      .history-content::-webkit-scrollbar {
-        width: 4px;
+      /* Drag handle dla mobile */
+      .mobile-drag-handle {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        cursor: move;
+        touch-action: none;
       }
 
-      .task-list-container::-webkit-scrollbar-thumb,
-      .history-content::-webkit-scrollbar-thumb {
-        background: rgba(0,0,0,0.2);
-        border-radius: 2px;
+      .mobile-task-item.dragging {
+        opacity: 0.5;
+        transform: scale(0.95);
+      }
+
+      /* Animacja statusu checkbox dla mobile */
+      .mobile-task-checkbox[data-status="1"]::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 2px solid #2c6cf4;
+        border-radius: 12px;
+        pointer-events: none;
+        animation: stretch-visible 1.3s infinite ease-in-out;
+        opacity: 0.9;
+      }
+
+      .mobile-task-checkbox[data-status="2"] {
+        color: #27ae60;
+        border-color: #27ae60;
+      }
+
+      .mobile-task-checkbox[data-status="3"] {
+        color: #e74c3c;
+        border-color: #e74c3c;
+      }
+    }
+
+    /* ===== KONIEC NOWYCH STYLÓW DLA MOBILE ===== */
+
+    /* Specjalne ustawienia dla telefonu */
+    @media (max-width: 768px) {
+      .content-wrapper {
+        justify-content: flex-start;
+        padding-top: 60px;
+        min-height: auto;
+        padding-bottom: 60px;
+      }
+      
+      h1 {
+        margin-bottom: 40px;
+        margin-top: 0;
       }
     }
 
@@ -736,7 +702,7 @@
       background: transparent;
       font-family: 'Segoe Print', 'Segoe UI Emoji', serif;
       font-style: normal;
-      font-size: clamp(10px, 1.5vw, 12px);
+      font-size: clamp(11px, 1.5vw, 13px);
       cursor: text;
       color: #2c3e50;
       line-height: 1.4;
@@ -853,6 +819,87 @@
       background: linear-gradient(135deg, #6bcf7f 0%, #4cd137 100%);
     }
 
+    /* Responsywność dla małych ekranów */
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      .content-wrapper {
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+
+      .carousel {
+        width: 90vw;
+        height: 90vw;
+        margin-bottom: 30px;
+      }
+
+      .circle {
+        width: 60vw;
+        height: 60vw;
+        padding: min(5vw, 25px);
+      }
+
+      .buttons-container {
+        right: 10px;
+        top: 10px;
+        flex-direction: column-reverse;
+        gap: 5px;
+      }
+
+      .save-button {
+        padding: 8px 16px;
+      }
+
+      .export-button, .import-button {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+
+      .task-line {
+        padding: 5px 6px;
+        margin-bottom: 6px;
+        min-width: 50px;
+      }
+
+      .checkbox {
+        width: 18px;
+        height: 18px;
+        font-size: 14px;
+        margin-right: 8px;
+      }
+
+      .checkbox[data-status="2"],
+      .checkbox[data-status="3"] {
+        font-size: 16px;
+      }
+
+      .task-text {
+        font-size: 12px;
+      }
+
+      .circle-title {
+        font-size: 16px;
+        margin-top: -5px;
+      }
+
+      .history-section {
+        padding: 20px;
+        margin-top: 15px;
+      }
+
+      .history-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+      
+      .task-list-container {
+        max-width: calc(100% - 20px);
+      }
+    }
+
     /* Animacja pojawiania się */
     .circle {
       animation: popIn 0.5s ease-out backwards;
@@ -894,17 +941,37 @@
     }
 
     #current-date {
-      font-size: clamp(14px, 2vw, 18px);
+      font-size: clamp(15px, 2vw, 19px);
       font-weight: 600;
       color: #2c3e50;
       margin-bottom: 4px;
     }
 
     #current-time {
-      font-size: clamp(18px, 3vw, 24px);
+      font-size: clamp(16px, 3vw, 22px);
       font-weight: 700;
       color: #2c3e50;
       letter-spacing: 1px;
+    }
+
+    /* Responsywność dla małych ekranów - data i czas */
+    @media (max-width: 480px) {
+      .datetime-container {
+        left: 10px;
+        top: auto;
+        bottom: 10px;
+        padding: 8px 16px;
+        min-width: 120px;
+      }
+      
+      #current-date {
+        font-size: 11px;
+        margin-bottom: 2px;
+      }
+      
+      #current-time {
+        font-size: 16px;
+      }
     }
 
     /* Dodatkowy styl dla szerszej zawartości */
@@ -920,43 +987,70 @@
       box-shadow: 0 0 30px rgba(255,255,255,0.4);
       background: rgba(255, 255, 255, 0.25);
     }
-
-    /* Ukryj elementy mobilne na desktopie */
-    @media (min-width: 769px) {
-      .mobile-circles-container,
-      .add-task-btn,
-      .circle-selector-modal,
-      .modal-overlay,
-      .mobile-bottom-bar {
-        display: none !important;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="content-wrapper">
     <h1>Karuzela zadań</h1>
+    
+    <!-- Data i czas dla mobile -->
+    <div class="mobile-datetime">
+      <div id="mobile-date"></div>
+      <div id="mobile-time"></div>
+    </div>
+    
     <div class="datetime-container">
       <div id="current-date"></div>
       <div id="current-time"></div>
     </div>
-    
-    <!-- Karuzela dla desktop -->
     <div id="carousel" class="carousel"></div>
     
-    <!-- Kontener mobilny -->
-    <div class="mobile-circles-container" id="mobile-circles"></div>
-    
     <!-- Sekcja historii zadań -->
-    <div class="history-section" id="history-section">
-      <div class="history-title">
-        📚 Historia zadań
-        <button class="history-close-btn" onclick="toggleHistory()" style="display: none;">✕</button>
-      </div>
+    <div class="history-section">
+      <div class="history-title">📚 Historia zadań</div>
       <div class="history-content" id="history-content">
         <div class="history-empty">Przeciągnij tutaj zadania, aby przenieść je do historii</div>
       </div>
     </div>
+    
+    <!-- NOWY: Widok mobilny -->
+    <div class="mobile-circles-view" id="mobile-circles-view">
+      <!-- Koła będą generowane tutaj przez JavaScript -->
+    </div>
+    
+    <div class="mobile-history-view" id="mobile-history-view">
+      <div class="mobile-history-container">
+        <div class="history-title">📚 Historia zadań</div>
+        <div class="history-content" id="mobile-history-content">
+          <div class="history-empty">Brak zadań w historii</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- NOWA: Nawigacja mobilna -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-tabs">
+        <button class="mobile-nav-tab active" data-view="tasks">
+          <span class="icon">📋</span>
+          <span>Zadania</span>
+        </button>
+        <button class="mobile-nav-tab" data-view="history" id="mobile-history-tab">
+          <span class="icon">📚</span>
+          <span>Historia</span>
+        </button>
+        <div class="mobile-action-buttons">
+          <button class="mobile-action-btn save" onclick="saveData()">
+            💾 Zapisz
+          </button>
+          <button class="mobile-action-btn" onclick="exportData()">
+            ⬇ Eksport
+          </button>
+          <button class="mobile-action-btn" onclick="document.getElementById('import-input').click()">
+            ⬆ Import
+          </button>
+        </div>
+      </div>
+    </nav>
     
     <div class="buttons-container">
       <button class="export-button" onclick="exportData()">
@@ -971,46 +1065,8 @@
     <div class="hint">Podwójne kliknięcie aby dodać zadanie • Przeciągnij między kołami</div>
   </div>
 
-  <!-- Elementy mobilne -->
-  <button class="add-task-btn" id="add-task-btn" onclick="openCircleSelector()">+</button>
-  
-  <div class="modal-overlay" id="modal-overlay" onclick="closeCircleSelector()"></div>
-  
-  <div class="circle-selector-modal" id="circle-selector">
-    <div class="circle-selector-title">Wybierz kategorię</div>
-    <div class="circle-selector-options">
-      <div class="circle-selector-option" onclick="addTaskToCircle(0)">🔥 Pilne</div>
-      <div class="circle-selector-option" onclick="addTaskToCircle(1)">📋 Do zrobienia</div>
-      <div class="circle-selector-option" onclick="addTaskToCircle(2)">💭 Może później</div>
-    </div>
-  </div>
-
-  <div class="mobile-bottom-bar">
-    <button onclick="toggleHistory()">
-      <span class="icon">📚</span>
-      <span>Historia</span>
-    </button>
-    <button onclick="saveData()">
-      <span class="icon">💾</span>
-      <span>Zapisz</span>
-    </button>
-    <button onclick="exportData()">
-      <span class="icon">⬇</span>
-      <span>Eksport</span>
-    </button>
-    <button onclick="document.getElementById('import-input').click()">
-      <span class="icon">⬆</span>
-      <span>Import</span>
-    </button>
-	<button onclick="shareData()" id="share-button">
-      <span class="icon">📤</span>
-      <span>Udostępnij</span>
-    </button>
-  </div>
-
   <script>
     const carousel = document.getElementById("carousel");
-    const mobileCirclesContainer = document.getElementById("mobile-circles");
     const historyContent = document.getElementById("history-content");
     const historySection = document.querySelector(".history-section");
     const isMobile = window.innerWidth <= 768;
@@ -1049,39 +1105,406 @@
     
     const savedHistory = JSON.parse(localStorage.getItem("taskHistory")) || [];
 
-    // Funkcje mobilne
-    function openCircleSelector() {
-      document.getElementById('circle-selector').classList.add('active');
-      document.getElementById('modal-overlay').classList.add('active');
-    }
+    // ===== NOWE FUNKCJE DLA MOBILE =====
+    let currentMobileView = 'tasks';
+    let mobileDraggedTask = null;
+    let mobileDraggedFrom = null;
 
-    function closeCircleSelector() {
-      document.getElementById('circle-selector').classList.remove('active');
-      document.getElementById('modal-overlay').classList.remove('active');
-    }
+    function initMobileView() {
+      if (!isMobile) return;
 
-    function addTaskToCircle(circleIndex) {
-      closeCircleSelector();
-      const mobileCircles = document.querySelectorAll('.mobile-circle');
-      if (mobileCircles[circleIndex]) {
-        const taskListContainer = mobileCircles[circleIndex].querySelector('.task-list-container');
-        const newTask = createTaskLine({ text: "", status: 0 }, () => isModified = true);
-        taskListContainer.appendChild(newTask);
-        newTask.querySelector(".task-text").focus();
-        syncTaskWidths(mobileCircles[circleIndex]);
-      }
-    }
-
-    function toggleHistory() {
-      const historySection = document.getElementById('history-section');
-      const isActive = historySection.classList.contains('active');
+      const mobileCirclesView = document.getElementById('mobile-circles-view');
+      const mobileHistoryView = document.getElementById('mobile-history-view');
       
-      if (isActive) {
-        historySection.classList.remove('active');
-      } else {
-        historySection.classList.add('active');
+      // Twórz mobilne koła
+      taskData.forEach((circleData, index) => {
+        const container = document.createElement('div');
+        container.className = 'mobile-circle-container';
+        container.dataset.circleIndex = index;
+        
+        // Ustawienie kolorów tła zgodnie z oryginalnymi kołami
+        const colors = [
+          'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)',
+          'linear-gradient(135deg, #ffd93d 0%, #f9ca24 100%)',
+          'linear-gradient(135deg, #6bcf7f 0%, #4cd137 100%)'
+        ];
+        container.style.background = colors[index];
+        
+        const header = document.createElement('div');
+        header.className = 'mobile-circle-header';
+        
+        const title = document.createElement('div');
+        title.className = 'mobile-circle-title';
+        title.textContent = titles[index];
+        title.style.color = 'white';
+        
+        const addBtn = document.createElement('button');
+        addBtn.className = 'mobile-add-task-btn';
+        addBtn.textContent = '+ Dodaj';
+        addBtn.addEventListener('click', () => addMobileTask(index));
+        
+        header.appendChild(title);
+        header.appendChild(addBtn);
+        
+        const taskList = document.createElement('div');
+        taskList.className = 'mobile-task-list';
+        taskList.dataset.circleIndex = index;
+        
+        // Obsługa drag & drop - dodaj też na kontener
+        taskList.addEventListener('dragover', handleMobileDragOver);
+        taskList.addEventListener('drop', handleMobileDrop);
+        container.addEventListener('dragover', handleMobileDragOver);
+        container.addEventListener('drop', handleMobileContainerDrop);
+        
+        container.appendChild(header);
+        container.appendChild(taskList);
+        mobileCirclesView.appendChild(container);
+        
+        // Wypełnij zadaniami
+        updateMobileCircleTasks(index);
+      });
+      
+      // Ustaw nawigację
+      const navTabs = document.querySelectorAll('.mobile-nav-tab');
+      navTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          navTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          const view = tab.dataset.view;
+          if (view === 'tasks') {
+            mobileCirclesView.style.display = 'block';
+            mobileHistoryView.style.display = 'none';
+          } else {
+            mobileCirclesView.style.display = 'none';
+            mobileHistoryView.style.display = 'block';
+            updateMobileHistory();
+          }
+          currentMobileView = view;
+        });
+      });
+      
+      // Obsługa przeciągania na przycisk historii
+      const historyTab = document.getElementById('mobile-history-tab');
+      historyTab.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        historyTab.classList.add('drag-over');
+      });
+      
+      historyTab.addEventListener('dragleave', () => {
+        historyTab.classList.remove('drag-over');
+      });
+      
+      historyTab.addEventListener('drop', (e) => {
+        e.preventDefault();
+        historyTab.classList.remove('drag-over');
+        
+        if (mobileDraggedTask && mobileDraggedFrom) {
+          // Przenieś zadanie do historii
+          const task = taskData[mobileDraggedFrom.circleIndex][mobileDraggedFrom.taskIndex];
+          
+          const historyTask = {
+            text: task.text,
+            status: task.status,
+            timestamp: new Date().toISOString()
+          };
+          
+          savedHistory.unshift(historyTask);
+          
+          // Usuń z oryginalnego miejsca
+          taskData[mobileDraggedFrom.circleIndex].splice(mobileDraggedFrom.taskIndex, 1);
+          
+          // Aktualizuj widoki
+          updateMobileCircleTasks(mobileDraggedFrom.circleIndex);
+          updateMobileHistory();
+          
+          // Przełącz na widok historii
+          navTabs.forEach(t => t.classList.remove('active'));
+          historyTab.classList.add('active');
+          mobileCirclesView.style.display = 'none';
+          mobileHistoryView.style.display = 'block';
+          currentMobileView = 'history';
+          
+          isModified = true;
+        }
+      });
+    }
+
+    function createMobileTaskElement(task, circleIndex, taskIndex) {
+      const taskItem = document.createElement('div');
+      taskItem.className = 'mobile-task-item';
+      taskItem.draggable = true;
+      taskItem.dataset.circleIndex = circleIndex;
+      taskItem.dataset.taskIndex = taskIndex;
+      
+      const checkbox = document.createElement('div');
+      checkbox.className = 'mobile-task-checkbox';
+      checkbox.dataset.status = task.status || 0;
+      updateMobileCheckboxDisplay(checkbox);
+      
+      checkbox.addEventListener('click', () => {
+        let status = parseInt(checkbox.dataset.status);
+        status = (status + 1) % 4;
+        checkbox.dataset.status = status;
+        updateMobileCheckboxDisplay(checkbox);
+        
+        // Aktualizuj dane
+        if (taskData[circleIndex] && taskData[circleIndex][taskIndex]) {
+          taskData[circleIndex][taskIndex].status = status;
+          isModified = true;
+        }
+      });
+      
+      const text = document.createElement('div');
+      text.className = 'mobile-task-text';
+      text.contentEditable = true;
+      text.innerHTML = task.text.replace(/\n/g, '<br>');
+      
+      text.addEventListener('input', () => {
+        if (taskData[circleIndex] && taskData[circleIndex][taskIndex]) {
+          taskData[circleIndex][taskIndex].text = text.innerHTML;
+          isModified = true;
+        }
+      });
+      
+      // Obsługa Backspace dla mobile
+      text.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          if (!e.shiftKey) {
+            // Pozwól na normalne zachowanie Enter (nowa linia)
+          }
+        } else if (e.key === 'Backspace') {
+          if (text.innerHTML === '' || text.innerText.trim() === '') {
+            e.preventDefault();
+            const taskList = taskItem.parentNode;
+            const prevTask = taskItem.previousElementSibling;
+            
+            // Usuń zadanie z danych
+            taskData[circleIndex].splice(taskIndex, 1);
+            
+            // Usuń element DOM
+            taskItem.remove();
+            
+            // Zaktualizuj widok
+            updateMobileCircleTasks(circleIndex);
+            
+            // Ustaw focus na poprzednim zadaniu jeśli istnieje
+            if (prevTask) {
+              const prevText = prevTask.querySelector('.mobile-task-text');
+              if (prevText) {
+                prevText.focus();
+                // Ustaw kursor na końcu tekstu
+                const range = document.createRange();
+                const sel = window.getSelection();
+                range.selectNodeContents(prevText);
+                range.collapse(false);
+                sel.removeAllRanges();
+                sel.addRange(range);
+              }
+            }
+            
+            isModified = true;
+          }
+        }
+      });
+      
+      const dragHandle = document.createElement('div');
+      dragHandle.className = 'mobile-drag-handle';
+      dragHandle.innerHTML = '≡';
+      
+      // Drag events
+      taskItem.addEventListener('dragstart', handleMobileDragStart);
+      taskItem.addEventListener('dragend', handleMobileDragEnd);
+      
+      taskItem.appendChild(checkbox);
+      taskItem.appendChild(text);
+      taskItem.appendChild(dragHandle);
+      
+      return taskItem;
+    }
+
+    function updateMobileCheckboxDisplay(checkbox) {
+      const status = parseInt(checkbox.dataset.status);
+      if (status === 0) {
+        checkbox.textContent = "";
+      } else if (status === 1) {
+        checkbox.textContent = "";
+      } else if (status === 2) {
+        checkbox.innerHTML = '✓';
+      } else if (status === 3) {
+        checkbox.innerHTML = '✗';
       }
     }
+
+    function updateMobileCircleTasks(circleIndex) {
+      const taskList = document.querySelector(`.mobile-task-list[data-circle-index="${circleIndex}"]`);
+      if (!taskList) return;
+      
+      taskList.innerHTML = '';
+      
+      if (taskData[circleIndex]) {
+        taskData[circleIndex].forEach((task, taskIndex) => {
+          const taskElement = createMobileTaskElement(task, circleIndex, taskIndex);
+          taskList.appendChild(taskElement);
+        });
+      }
+    }
+
+    function addMobileTask(circleIndex, insertAt = null) {
+      if (!taskData[circleIndex]) {
+        taskData[circleIndex] = [];
+      }
+      
+      const newTask = { text: "", status: 0 };
+      
+      if (insertAt !== null) {
+        taskData[circleIndex].splice(insertAt, 0, newTask);
+      } else {
+        taskData[circleIndex].push(newTask);
+      }
+      
+      updateMobileCircleTasks(circleIndex);
+      isModified = true;
+      
+      // Focus na nowym zadaniu
+      setTimeout(() => {
+        const taskList = document.querySelector(`.mobile-task-list[data-circle-index="${circleIndex}"]`);
+        const newTaskElement = insertAt !== null ? 
+          taskList.children[insertAt] : 
+          taskList.lastElementChild;
+        
+        if (newTaskElement) {
+          const textElement = newTaskElement.querySelector('.mobile-task-text');
+          if (textElement) textElement.focus();
+        }
+      }, 0);
+    }
+
+    function handleMobileDragStart(e) {
+      mobileDraggedTask = e.target;
+      mobileDraggedFrom = {
+        circleIndex: parseInt(e.target.dataset.circleIndex),
+        taskIndex: parseInt(e.target.dataset.taskIndex)
+      };
+      e.target.classList.add('dragging');
+    }
+
+    function handleMobileDragEnd(e) {
+      e.target.classList.remove('dragging');
+      mobileDraggedTask = null;
+      mobileDraggedFrom = null;
+    }
+
+    function handleMobileDragOver(e) {
+      e.preventDefault();
+    }
+
+    function handleMobileDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (!mobileDraggedTask || !mobileDraggedFrom) return;
+      
+      const targetCircleIndex = parseInt(e.currentTarget.dataset.circleIndex);
+      
+      // Znajdź, gdzie upuścić zadanie
+      let targetIndex = taskData[targetCircleIndex]?.length || 0;
+      
+      const taskElements = Array.from(e.currentTarget.children);
+      for (let i = 0; i < taskElements.length; i++) {
+        const rect = taskElements[i].getBoundingClientRect();
+        if (e.clientY < rect.top + rect.height / 2) {
+          targetIndex = i;
+          break;
+        }
+      }
+      
+      // Przenieś zadanie
+      const task = taskData[mobileDraggedFrom.circleIndex][mobileDraggedFrom.taskIndex];
+      
+      // Usuń z oryginalnego miejsca
+      taskData[mobileDraggedFrom.circleIndex].splice(mobileDraggedFrom.taskIndex, 1);
+      
+      // Dodaj w nowym miejscu
+      if (!taskData[targetCircleIndex]) {
+        taskData[targetCircleIndex] = [];
+      }
+      taskData[targetCircleIndex].splice(targetIndex, 0, task);
+      
+      // Aktualizuj widoki
+      updateMobileCircleTasks(mobileDraggedFrom.circleIndex);
+      updateMobileCircleTasks(targetCircleIndex);
+      
+      isModified = true;
+    }
+
+    // Nowa funkcja do obsługi drop na kontenerze koła
+    function handleMobileContainerDrop(e) {
+      e.preventDefault();
+      
+      // Sprawdź czy drop nie jest na liście zadań
+      if (e.target.classList.contains('mobile-task-list') || e.target.closest('.mobile-task-list')) {
+        return;
+      }
+      
+      if (!mobileDraggedTask || !mobileDraggedFrom) return;
+      
+      const targetCircleIndex = parseInt(e.currentTarget.dataset.circleIndex);
+      
+      // Przenieś zadanie na koniec listy
+      const task = taskData[mobileDraggedFrom.circleIndex][mobileDraggedFrom.taskIndex];
+      
+      // Usuń z oryginalnego miejsca
+      taskData[mobileDraggedFrom.circleIndex].splice(mobileDraggedFrom.taskIndex, 1);
+      
+      // Dodaj na koniec nowej listy
+      if (!taskData[targetCircleIndex]) {
+        taskData[targetCircleIndex] = [];
+      }
+      taskData[targetCircleIndex].push(task);
+      
+      // Aktualizuj widoki
+      updateMobileCircleTasks(mobileDraggedFrom.circleIndex);
+      updateMobileCircleTasks(targetCircleIndex);
+      
+      isModified = true;
+    }
+
+    function updateMobileHistory() {
+      const mobileHistoryContent = document.getElementById('mobile-history-content');
+      mobileHistoryContent.innerHTML = '';
+      
+      if (savedHistory.length === 0) {
+        mobileHistoryContent.innerHTML = '<div class="history-empty">Brak zadań w historii</div>';
+      } else {
+        savedHistory.forEach(task => {
+          const taskElement = document.createElement('div');
+          taskElement.className = 'mobile-task-item';
+          
+          const checkbox = document.createElement('div');
+          checkbox.className = 'mobile-task-checkbox';
+          checkbox.dataset.status = task.status || 0;
+          updateMobileCheckboxDisplay(checkbox);
+          
+          const text = document.createElement('div');
+          text.className = 'mobile-task-text';
+          text.innerHTML = task.text.replace(/\n/g, '<br>');
+          
+          const timestamp = document.createElement('div');
+          timestamp.className = 'timestamp';
+          timestamp.textContent = formatTimestamp(task.timestamp);
+          timestamp.style.fontSize = '10px';
+          timestamp.style.color = '#999';
+          
+          taskElement.appendChild(checkbox);
+          taskElement.appendChild(text);
+          taskElement.appendChild(timestamp);
+          
+          mobileHistoryContent.appendChild(taskElement);
+        });
+      }
+    }
+    // ===== KONIEC NOWYCH FUNKCJI DLA MOBILE =====
 
     function formatTimestamp(date) {
       const now = new Date();
@@ -1123,7 +1546,7 @@
     function createTaskLine(task, onChange, isHistory = false) {
       const line = document.createElement("div");
       line.className = isHistory ? "history-task" : "task-line";
-      line.draggable = !isMobile || isHistory;
+      line.draggable = true;
 
       const checkbox = document.createElement("div");
       checkbox.className = "checkbox";
@@ -1214,12 +1637,12 @@
           if (isUserInput) {
             clearTimeout(inputTimeout);
             inputTimeout = setTimeout(() => {
-              addToHistory(text.textContent);
+              addToHistory(text.innerHTML);
             }, 100);
             
             onChange();
             // MODYFIKACJA: Synchronizuj szerokość po wpisaniu tekstu
-            syncTaskWidths(line.closest('.circle, .mobile-circle'));
+            syncTaskWidths(line.closest('.circle'));
           }
         });
 
@@ -1233,10 +1656,10 @@
           selection.getRangeAt(0).insertNode(document.createTextNode(pastedText));
           selection.collapseToEnd();
           
-          addToHistory(text.textContent);
+          addToHistory(text.innerHTML);
           onChange();
           // MODYFIKACJA: Synchronizuj szerokość po wklejeniu
-          syncTaskWidths(line.closest('.circle, .mobile-circle'));
+          syncTaskWidths(line.closest('.circle'));
         });
 
         let isBackspaceHeld = false;
@@ -1249,7 +1672,7 @@
               if (history.currentIndex > 0) {
                 history.currentIndex--;
                 isUserInput = false;
-                text.textContent = history.states[history.currentIndex];
+                text.innerHTML = history.states[history.currentIndex];
                 isUserInput = true;
                 const range = document.createRange();
                 const selection = window.getSelection();
@@ -1258,7 +1681,7 @@
                 selection.removeAllRanges();
                 selection.addRange(range);
                 onChange();
-                syncTaskWidths(line.closest('.circle, .mobile-circle')); // MODYFIKACJA
+                syncTaskWidths(line.closest('.circle')); // MODYFIKACJA
               }
             } else if (e.key === "y") {
               e.preventDefault();
@@ -1266,7 +1689,7 @@
               if (history.currentIndex < history.states.length - 1) {
                 history.currentIndex++;
                 isUserInput = false;
-                text.textContent = history.states[history.currentIndex];
+                text.innerHTML = history.states[history.currentIndex];
                 isUserInput = true;
                 const range = document.createRange();
                 const selection = window.getSelection();
@@ -1275,7 +1698,7 @@
                 selection.removeAllRanges();
                 selection.addRange(range);
                 onChange();
-                syncTaskWidths(line.closest('.circle, .mobile-circle')); // MODYFIKACJA
+                syncTaskWidths(line.closest('.circle')); // MODYFIKACJA
               }
             }
           }
@@ -1283,7 +1706,7 @@
           if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
             clearTimeout(inputTimeout);
-            const parentCircle = line.closest('.circle, .mobile-circle'); // MODYFIKACJA
+            const parentCircle = line.closest('.circle'); // MODYFIKACJA
             const newTask = createTaskLine({ text: "", status: 0 }, onChange);
             line.parentNode.insertBefore(newTask, line.nextSibling);
             newTask.querySelector(".task-text").focus();
@@ -1293,16 +1716,25 @@
               isBackspaceHeld = true;
             }
             
-            if (text.textContent === "" && !isBackspaceHeld) {
+            if ((text.innerHTML === "" || text.innerText.trim() === "") && !isBackspaceHeld) {
               e.preventDefault();
               clearTimeout(inputTimeout);
               const parent = line.parentNode;
-              const parentCircle = line.closest('.circle, .mobile-circle'); // MODYFIKACJA
+              const parentCircle = line.closest('.circle'); // MODYFIKACJA
               const previous = line.previousElementSibling;
               parent.removeChild(line);
               if (previous && previous.querySelector) {
                 const input = previous.querySelector(".task-text");
-                if (input) input.focus();
+                if (input) {
+                  input.focus();
+                  // Ustaw kursor na końcu tekstu
+                  const range = document.createRange();
+                  const selection = window.getSelection();
+                  range.selectNodeContents(input);
+                  range.collapse(false);
+                  selection.removeAllRanges();
+                  selection.addRange(range);
+                }
               }
               onChange();
               syncTaskWidths(parentCircle); // MODYFIKACJA
@@ -1315,86 +1747,34 @@
             isBackspaceHeld = false;
           }
         });
+      }
 
-        // Obsługa swipe do usunięcia na mobile
-        if (isMobile && !isHistory) {
-          let touchStartX = 0;
-          let touchStartY = 0;
-          let swipeThreshold = 100;
-
-          line.addEventListener("touchstart", (e) => {
-            if (e.target === checkbox || e.target === text) return;
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-          });
-
-          line.addEventListener("touchmove", (e) => {
-            if (e.target === checkbox || e.target === text) return;
-            const touchX = e.touches[0].clientX;
-            const touchY = e.touches[0].clientY;
-            const diffX = touchX - touchStartX;
-            const diffY = Math.abs(touchY - touchStartY);
-            
-            if (diffX > 10 && diffY < 30) {
-              line.style.transform = `translateX(${diffX}px)`;
-              line.style.opacity = 1 - (diffX / 200);
-            }
-          });
-
-          line.addEventListener("touchend", (e) => {
-            if (e.target === checkbox || e.target === text) return;
-            const touchEndX = e.changedTouches[0].clientX;
-            const diffX = touchEndX - touchStartX;
-            
-            if (diffX > swipeThreshold) {
-              // Przeniesienie do historii
-              const taskData = {
-                text: text.innerHTML,
-                status: parseInt(checkbox.dataset.status),
-                timestamp: new Date().toISOString()
-              };
-              savedHistory.unshift(taskData);
-              const parentCircle = line.closest('.mobile-circle');
-              line.parentNode.removeChild(line);
-              updateHistoryView();
-              syncTaskWidths(parentCircle);
-              isModified = true;
-            } else {
-              line.style.transform = '';
-              line.style.opacity = '';
-            }
-          });
+      line.addEventListener("dragstart", (e) => {
+        draggedTask = line;
+        // MODYFIKACJA: Zapisz koło źródłowe, aby zaktualizować jego szerokość po upuszczeniu zadania gdzie indziej
+        draggedTask.sourceCircle = line.closest('.circle'); 
+        line.classList.add("dragging");
+        
+        const dragData = {
+          text: isHistory ? text.innerHTML : text.innerHTML,
+          status: checkbox.dataset.status,
+          isFromHistory: isHistory
+        };
+        
+        if (isHistory && task.timestamp) {
+          dragData.timestamp = task.timestamp;
         }
-      }
+        
+        e.dataTransfer.effectAllowed = "move";
+        e.dataTransfer.setData("taskData", JSON.stringify(dragData));
+      });
 
-      if (!isMobile) {
-        line.addEventListener("dragstart", (e) => {
-          draggedTask = line;
-          // MODYFIKACJA: Zapisz koło źródłowe, aby zaktualizować jego szerokość po upuszczeniu zadania gdzie indziej
-          draggedTask.sourceCircle = line.closest('.circle'); 
-          line.classList.add("dragging");
-          
-          const dragData = {
-            text: isHistory ? text.innerHTML : text.textContent,
-            status: checkbox.dataset.status,
-            isFromHistory: isHistory
-          };
-          
-          if (isHistory && task.timestamp) {
-            dragData.timestamp = task.timestamp;
-          }
-          
-          e.dataTransfer.effectAllowed = "move";
-          e.dataTransfer.setData("taskData", JSON.stringify(dragData));
-        });
-
-        line.addEventListener("dragend", () => {
-          // MODYFIKACJA: Usuń zapisaną referencję do koła źródłowego
-          if (draggedTask) draggedTask.sourceCircle = null;
-          draggedTask = null;
-          line.classList.remove("dragging");
-        });
-      }
+      line.addEventListener("dragend", () => {
+        // MODYFIKACJA: Usuń zapisaną referencję do koła źródłowego
+        if (draggedTask) draggedTask.sourceCircle = null;
+        draggedTask = null;
+        line.classList.remove("dragging");
+      });
 
       line.appendChild(checkbox);
       line.appendChild(text);
@@ -1422,190 +1802,155 @@
       }
     }
 
-    if (!isMobile) {
-      historySection.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        historySection.classList.add("drag-over");
-      });
+    historySection.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      historySection.classList.add("drag-over");
+    });
 
-      historySection.addEventListener("dragleave", () => {
-        historySection.classList.remove("drag-over");
-      });
+    historySection.addEventListener("dragleave", () => {
+      historySection.classList.remove("drag-over");
+    });
 
-      historySection.addEventListener("drop", (e) => {
-        e.preventDefault();
-        historySection.classList.remove("drag-over");
+    historySection.addEventListener("drop", (e) => {
+      e.preventDefault();
+      historySection.classList.remove("drag-over");
+      
+      if (draggedTask && !draggedTask.classList.contains("history-task")) {
+        // MODYFIKACJA: Pobierz koło źródłowe PRZED usunięciem zadania
+        const sourceCircle = draggedTask.closest('.circle');
+
+        const taskData = {
+          text: draggedTask.querySelector(".task-text").innerHTML,
+          status: parseInt(draggedTask.querySelector(".checkbox").dataset.status),
+          timestamp: new Date().toISOString()
+        };
         
-        if (draggedTask && !draggedTask.classList.contains("history-task")) {
-          // MODYFIKACJA: Pobierz koło źródłowe PRZED usunięciem zadania
-          const sourceCircle = draggedTask.closest('.circle');
-
-          const taskData = {
-            text: draggedTask.querySelector(".task-text").innerHTML,
-            status: parseInt(draggedTask.querySelector(".checkbox").dataset.status),
-            timestamp: new Date().toISOString()
-          };
-          
-          savedHistory.unshift(taskData);
-          draggedTask.parentNode.removeChild(draggedTask);
-          
-          updateHistoryView();
-          
-          // MODYFIKACJA: Zaktualizuj szerokości w kole, z którego zabrano zadanie
-          syncTaskWidths(sourceCircle);
-          isModified = true;
-        }
-      });
-    }
-
-    // Tworzenie kół dla desktop i mobile
-    if (isMobile) {
-      // Tworzenie mobilnych kół
-      for (let i = 0; i < 3; i++) {
-        const mobileCircle = document.createElement("div");
-        mobileCircle.className = "mobile-circle";
+        savedHistory.unshift(taskData);
+        draggedTask.parentNode.removeChild(draggedTask);
         
-        const title = document.createElement("div");
-        title.className = "circle-title";
-        title.textContent = titles[i];
-        mobileCircle.appendChild(title);
-
-        const taskListContainer = document.createElement("div");
-        taskListContainer.className = "task-list-container";
-        mobileCircle.appendChild(taskListContainer);
-
-        taskData[i].forEach(task => {
-          const taskLine = createTaskLine(task, () => isModified = true);
-          taskListContainer.appendChild(taskLine);
-        });
-
-        mobileCirclesContainer.appendChild(mobileCircle);
+        updateHistoryView();
+        
+        // MODYFIKACJA: Zaktualizuj szerokości w kole, z którego zabrano zadanie
+        syncTaskWidths(sourceCircle);
+        isModified = true;
       }
+    });
 
-      // Zaktualizuj przyciski historii na mobile
-      const historyCloseBtn = document.querySelector('.history-close-btn');
-      if (historyCloseBtn) {
-        historyCloseBtn.style.display = 'block';
-      }
-    } else {
-      // Tworzenie kół dla desktop (oryginalny kod)
-      for (let i = 0; i < 3; i++) {
-        const circle = document.createElement("div");
-        circle.className = "circle";
+    for (let i = 0; i < 3; i++) {
+      const circle = document.createElement("div");
+      circle.className = "circle";
 
-        const title = document.createElement("div");
-        title.className = "circle-title";
-        title.textContent = titles[i];
-        circle.appendChild(title);
+      const title = document.createElement("div");
+      title.className = "circle-title";
+      title.textContent = titles[i];
+      circle.appendChild(title);
 
-        const taskListContainer = document.createElement("div");
-        taskListContainer.className = "task-list-container";
-        circle.appendChild(taskListContainer);
+      const taskListContainer = document.createElement("div");
+      taskListContainer.className = "task-list-container";
+      circle.appendChild(taskListContainer);
 
-        taskListContainer.addEventListener("dragover", (e) => {
-          e.preventDefault();
-          circle.classList.add("active");
-          const dragging = document.querySelector(".dragging");
-          const afterElement = Array.from(taskListContainer.querySelectorAll(".task-line"))
-            .filter(el => el !== dragging)
-            .find(el => {
-              const box = el.getBoundingClientRect();
-              return e.clientY < box.top + box.height / 2;
-            });
-          taskListContainer._dropTarget = afterElement;
-        });
+      taskListContainer.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        circle.classList.add("active");
+        const dragging = document.querySelector(".dragging");
+        const afterElement = Array.from(taskListContainer.querySelectorAll(".task-line"))
+          .filter(el => el !== dragging)
+          .find(el => {
+            const box = el.getBoundingClientRect();
+            return e.clientY < box.top + box.height / 2;
+          });
+        taskListContainer._dropTarget = afterElement;
+      });
 
-        taskListContainer.addEventListener("dragleave", () => {
-          circle.classList.remove("active");
-        });
+      taskListContainer.addEventListener("dragleave", () => {
+        circle.classList.remove("active");
+      });
 
-        taskListContainer.addEventListener("drop", (e) => {
-          circle.classList.remove("active");
-          if (draggedTask) {
-            const sourceCircle = draggedTask.sourceCircle; // MODYFIKACJA
-            
-            if (draggedTask.classList.contains("history-task")) {
-              const taskDataStr = e.dataTransfer.getData("taskData");
-              if (taskDataStr) {
-                const taskData = JSON.parse(taskDataStr);
-                const newTask = createTaskLine({
-                  text: taskData.text,
-                  status: parseInt(taskData.status)
-                }, () => isModified = true);
-                
-                const afterElement = taskListContainer._dropTarget;
-                if (afterElement) {
-                  taskListContainer.insertBefore(newTask, afterElement);
-                } else {
-                  taskListContainer.appendChild(newTask);
-                }
-                
-                const taskIndex = savedHistory.findIndex(t => (taskData.timestamp && t.timestamp === taskData.timestamp) || (t.text === taskData.text && t.status === parseInt(taskData.status)));
-                if (taskIndex > -1) {
-                  savedHistory.splice(taskIndex, 1);
-                  updateHistoryView();
-                }
-              }
-            } else {
+      taskListContainer.addEventListener("drop", (e) => {
+        circle.classList.remove("active");
+        if (draggedTask) {
+          const sourceCircle = draggedTask.sourceCircle; // MODYFIKACJA
+          
+          if (draggedTask.classList.contains("history-task")) {
+            const taskDataStr = e.dataTransfer.getData("taskData");
+            if (taskDataStr) {
+              const taskData = JSON.parse(taskDataStr);
+              const newTask = createTaskLine({
+                text: taskData.text,
+                status: parseInt(taskData.status)
+              }, () => isModified = true);
+              
               const afterElement = taskListContainer._dropTarget;
               if (afterElement) {
-                taskListContainer.insertBefore(draggedTask, afterElement);
+                taskListContainer.insertBefore(newTask, afterElement);
               } else {
-                taskListContainer.appendChild(draggedTask);
+                taskListContainer.appendChild(newTask);
+              }
+              
+              const taskIndex = savedHistory.findIndex(t => (taskData.timestamp && t.timestamp === taskData.timestamp) || (t.text === taskData.text && t.status === parseInt(taskData.status)));
+              if (taskIndex > -1) {
+                savedHistory.splice(taskIndex, 1);
+                updateHistoryView();
               }
             }
-            taskListContainer._dropTarget = null;
-            isModified = true;
-            
-            // MODYFIKACJA: Zaktualizuj szerokości w kole docelowym i źródłowym
-            syncTaskWidths(circle);
-            if (sourceCircle && sourceCircle !== circle) {
-                syncTaskWidths(sourceCircle);
+          } else {
+            const afterElement = taskListContainer._dropTarget;
+            if (afterElement) {
+              taskListContainer.insertBefore(draggedTask, afterElement);
+            } else {
+              taskListContainer.appendChild(draggedTask);
             }
           }
-        });
+          taskListContainer._dropTarget = null;
+          isModified = true;
+          
+          // MODYFIKACJA: Zaktualizuj szerokości w kole docelowym i źródłowym
+          syncTaskWidths(circle);
+          if (sourceCircle && sourceCircle !== circle) {
+              syncTaskWidths(sourceCircle);
+          }
+        }
+      });
 
-        taskData[i].forEach(task => {
-          const taskLine = createTaskLine(task, () => isModified = true);
-          taskListContainer.appendChild(taskLine);
-        });
+      taskData[i].forEach(task => {
+        const taskLine = createTaskLine(task, () => isModified = true);
+        taskListContainer.appendChild(taskLine);
+      });
 
-        circle.addEventListener("dblclick", (e) => {
-          if (!e.target.closest('.task-line') && !e.target.closest('.circle-title')) {
+      circle.addEventListener("dblclick", (e) => {
+        if (!e.target.closest('.task-line') && !e.target.closest('.circle-title')) {
+          const newTask = createTaskLine({ text: "", status: 0 }, () => isModified = true);
+          taskListContainer.appendChild(newTask);
+          newTask.querySelector(".task-text").focus();
+          syncTaskWidths(circle); // MODYFIKACJA
+        }
+      });
+
+      circle.addEventListener("touchstart", (e) => {
+        if (!e.target.closest('.task-line') && !e.target.closest('.circle-title')) {
+          longPressTimer = setTimeout(() => {
             const newTask = createTaskLine({ text: "", status: 0 }, () => isModified = true);
             taskListContainer.appendChild(newTask);
             newTask.querySelector(".task-text").focus();
             syncTaskWidths(circle); // MODYFIKACJA
-          }
-        });
+          }, longPressDuration);
+        }
+      });
 
-        circle.addEventListener("touchstart", (e) => {
-          if (!e.target.closest('.task-line') && !e.target.closest('.circle-title')) {
-            longPressTimer = setTimeout(() => {
-              const newTask = createTaskLine({ text: "", status: 0 }, () => isModified = true);
-              taskListContainer.appendChild(newTask);
-              newTask.querySelector(".task-text").focus();
-              syncTaskWidths(circle); // MODYFIKACJA
-            }, longPressDuration);
-          }
-        });
+      circle.addEventListener("touchend", () => {
+        clearTimeout(longPressTimer);
+      });
 
-        circle.addEventListener("touchend", () => {
-          clearTimeout(longPressTimer);
-        });
-
-        carousel.appendChild(circle);
-      }
+      carousel.appendChild(circle);
     }
 
     updateHistoryView();
 
     // MODYFIKACJA: Zsynchronizuj szerokości dla wszystkich kół po inicjalizacji
-    document.querySelectorAll('.circle, .mobile-circle').forEach(syncTaskWidths);
+    document.querySelectorAll('.circle').forEach(syncTaskWidths);
 
     function saveData() {
-      const circlesSelector = isMobile ? '.mobile-circle' : '.circle';
-      const data = [...document.querySelectorAll(circlesSelector)].map(circle =>
+      const data = isMobile ? taskData : [...carousel.querySelectorAll(".circle")].map(circle =>
         [...circle.querySelector(".task-list-container").querySelectorAll(".task-line")].map(line => ({
           text: line.querySelector(".task-text").innerHTML,
           status: parseInt(line.querySelector(".checkbox").dataset.status)
@@ -1617,9 +1962,8 @@
     }
 
     function exportData() {
-      const circlesSelector = isMobile ? '.mobile-circle' : '.circle';
       const data = {
-        taskData: [...document.querySelectorAll(circlesSelector)].map(circle =>
+        taskData: isMobile ? taskData : [...carousel.querySelectorAll(".circle")].map(circle =>
           [...circle.querySelector(".task-list-container").querySelectorAll(".task-line")].map(line => ({
             text: line.querySelector(".task-text").innerHTML,
             status: parseInt(line.querySelector(".checkbox").dataset.status)
@@ -1669,39 +2013,6 @@
       event.target.value = '';
     }
 
-async function shareData() {
-  const circlesSelector = isMobile ? '.mobile-circle' : '.circle';
-  const data = {
-    taskData: [...document.querySelectorAll(circlesSelector)].map(circle =>
-      [...circle.querySelector(".task-list-container").querySelectorAll(".task-line")].map(line => ({
-        text: line.querySelector(".task-text").innerHTML,
-        status: parseInt(line.querySelector(".checkbox").dataset.status)
-      }))
-    ),
-    taskHistory: savedHistory,
-    exportDate: new Date().toISOString()
-  };
-
-  const dataStr = JSON.stringify(data, null, 2);
-  const file = new File([dataStr], `karuzela-zadan-${new Date().toISOString().slice(0,10)}.json`, {
-    type: 'application/json'
-  });
-
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try {
-      await navigator.share({
-        title: 'Moje zadania',
-        text: 'Udostępnij plik z karuzeli zadań',
-        files: [file]
-      });
-    } catch (err) {
-      alert("Nie udało się udostępnić pliku: " + err.message);
-    }
-  } else {
-    alert('Twoja przeglądarka nie obsługuje udostępniania plików. Użyj np. Chrome na Androidzie.');
-  }
-}
-
     window.addEventListener("beforeunload", (e) => {
       if (isModified) {
         e.preventDefault();
@@ -1709,10 +2020,7 @@ async function shareData() {
       }
     });
 
-    // Funkcje karuzeli dla desktop
     function updatePositions() {
-      if (isMobile) return;
-      
       const items = carousel.querySelectorAll(".circle");
       const circlePositions = [];
 
@@ -1732,8 +2040,6 @@ async function shareData() {
     }
 
     function animate(timestamp) {
-      if (isMobile) return;
-      
       if (!lastTime) lastTime = timestamp;
       const delta = timestamp - lastTime;
       lastTime = timestamp;
@@ -1825,9 +2131,46 @@ async function shareData() {
       });
     }
 
-    // Usunięcie obsługi przeciągania tła na mobile, ponieważ nie jest już potrzebne
-
+    // Wyłącz przewijanie tła dla mobile
     if (!isMobile) {
+      document.body.addEventListener("touchstart", (e) => {
+        if (!e.target.closest('.carousel') && 
+            !e.target.closest('.circle') && 
+            !e.target.closest('.save-button') &&
+            !e.target.closest('.export-button') &&
+            !e.target.closest('.import-button') &&
+            !e.target.closest('.datetime-container') &&
+            !e.target.closest('.hint') &&
+            !e.target.closest('.history-section') &&
+            (e.target === document.body || e.target.closest('.content-wrapper'))) {
+          isBackgroundDragging = true;
+          startX = e.touches[0].pageX - window.scrollX;
+          startY = e.touches[0].pageY - window.scrollY;
+          scrollLeft = window.scrollX;
+          scrollTop = window.scrollY;
+        }
+      });
+
+      document.body.addEventListener("touchmove", (e) => {
+        if (isBackgroundDragging) {
+          const x = e.touches[0].pageX;
+          const y = e.touches[0].pageY;
+          const walkX = (x - startX) * -1;
+          const walkY = (y - startY) * -1;
+          window.scrollTo(scrollLeft + walkX, scrollTop + walkY);
+        }
+      });
+
+      document.body.addEventListener("touchend", () => {
+        isBackgroundDragging = false;
+      });
+    }
+
+    if (isMobile) {
+      document.body.style.minWidth = '100vw';
+      document.querySelector('.content-wrapper').style.minWidth = '100vw';
+      initMobileView();
+    } else {
       updatePositions();
     }
 
@@ -1847,8 +2190,15 @@ async function shareData() {
       const minutes = now.getMinutes().toString().padStart(2, '0');
       const timeString = `${hours}:${minutes}`;
       
-      document.getElementById('current-date').textContent = dateString;
-      document.getElementById('current-time').textContent = timeString;
+      const dateElement = document.getElementById('current-date');
+      const timeElement = document.getElementById('current-time');
+      const mobileDateElement = document.getElementById('mobile-date');
+      const mobileTimeElement = document.getElementById('mobile-time');
+      
+      if (dateElement) dateElement.textContent = dateString;
+      if (timeElement) timeElement.textContent = timeString;
+      if (mobileDateElement) mobileDateElement.textContent = dateString;
+      if (mobileTimeElement) mobileTimeElement.textContent = timeString;
     }
 
     updateDateTime();
